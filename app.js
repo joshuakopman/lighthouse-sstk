@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.listen(3000);
+app.listen(PORT);
 
 var SocketServer = require('ws').Server,
   wss = new SocketServer({port: PORT})
