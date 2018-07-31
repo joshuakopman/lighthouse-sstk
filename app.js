@@ -13,8 +13,8 @@ app.get('/', function(req, res) {
 
 app.listen(3000);
 
-var WebSocketServer = require('ws').Server;
-  wss = new WebSocketServer({app})
+var SocketServer = require('ws').Server,
+  wss = new SocketServer({port: PORT})
   wss.on('connection', function (ws) {
   	ws.on('message', function (message) {
     	console.log('received: %s', message)
