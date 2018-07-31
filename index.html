@@ -14,7 +14,6 @@ The current average lighthouse performance score for the day is: <span id="score
     }
     // event emmited when receiving message 
     ws.onmessage = function (ev) {
-    	console.log(ev);
     	var payload = JSON.parse(ev.data);
 		document.querySelector("#score").innerHTML = payload.score;
 	    document.querySelector("#runs").innerHTML = payload.runs;
