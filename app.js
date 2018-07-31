@@ -13,7 +13,7 @@ app.get('/', function(req, res) {
 
 app.listen(3000);
 
-const wss = new SocketServer({ server });
+const wss = new SocketServer({ app });
   wss.on('connection', function (ws) {
   	ws.on('message', function (message) {
     	console.log('received: %s', message)
