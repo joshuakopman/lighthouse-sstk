@@ -1,20 +1,17 @@
 var express = require('express');
-var app = express();
 var path = require('path');
-var ws = require('ws')
+const SocketServer = require('ws').Server;
 var lighthouseLauncher = require('./lighthouseLauncher');
 var currentAverage = 0;
 var noOfRuns = 1;
-const PORT = process.env.PORT || 8000;
-// viewed at http://localhost:8080
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
-});
+const PORT = process.env.PORT || 3000;
+const INDEX = path.join(__dirname, 'index.html');
 
-app.listen(PORT);
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-var SocketServer = require('ws').Server,
-  wss = new SocketServer({port: PORT})
+const wss = new SocketServer({ server });
   wss.on('connection', function (ws) {
   	ws.on('message', function (message) {
     	console.log('received: %s', message)
