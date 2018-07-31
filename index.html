@@ -1,0 +1,22 @@
+<html>
+
+<body>
+The current average lighthouse performance score for the day is: <span id="score"></span> after <span id ="runs"></span> runs
+</body>
+<script>
+    var ws = new WebSocket('ws://localhost:40510');
+    // event emmited when connected
+    ws.onopen = function () {
+        console.log('websocket is connected ...')
+        // sending a send event to websocket server
+        ws.send('connected')
+    }
+    // event emmited when receiving message 
+    ws.onmessage = function (ev) {
+    	console.log(ev);
+    	var payload = JSON.parse(ev.data);
+		document.querySelector("#score").innerHTML = payload.score;
+	    document.querySelector("#runs").innerHTML = payload.runs;
+    }
+</script>
+</html>
