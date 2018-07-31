@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.listen(8080);
+app.listen(3000);
 
 var WebSocketServer = require('ws').Server,
   wss = new WebSocketServer({port: 40510})
