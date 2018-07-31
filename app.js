@@ -5,7 +5,7 @@ var ws = require('ws')
 var lighthouseLauncher = require('./lighthouseLauncher');
 var currentAverage = 0;
 var noOfRuns = 1;
-
+const PORT = process.env.PORT || 8000;
 // viewed at http://localhost:8080
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -14,7 +14,7 @@ app.get('/', function(req, res) {
 app.listen(3000);
 
 var WebSocketServer = require('ws').Server,
-  wss = new WebSocketServer({port: 40510})
+  wss = new WebSocketServer({port: PORT})
   wss.on('connection', function (ws) {
   	ws.on('message', function (message) {
     	console.log('received: %s', message)

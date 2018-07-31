@@ -4,7 +4,7 @@
 The current average lighthouse performance score for the day is: <span id="score"></span> after <span id ="runs"></span> runs
 </body>
 <script>
-    var ws = new WebSocket('ws://localhost:40510');
+    var ws = new WebSocket('ws://lighthouse-reporter-sstk.herokuapp.com');
     // event emmited when connected
     ws.onopen = function () {
         console.log('websocket is connected ...')
