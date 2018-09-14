@@ -47,7 +47,7 @@ var LighthouseHelper = function(){
         runLighthouseReport:function(page,callback){
             var self = this;
             globals.testRunningID = page.pageType;
-            new lighthouseLauncher().launchChromeAndRunLighthouse(page.url).then(results => {
+            new lighthouseLauncher().launchChromeAndRunLighthouse(page.url, {chromeFlags: ['--headless']}).then(results => {
                 setTimeout(() => {
                      if (results && results.categories && results.categories.performance.score) {
                           page.currentScore = results.categories.performance.score * 100;
