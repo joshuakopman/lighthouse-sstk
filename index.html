@@ -1,22 +1,99 @@
 <html>
+    <head>
+        <title>Shutterstock Lighthouse</title>
+        <link rel="stylesheet" type="text/css" href="/assets/styles/main.css"></link>
+    </head>
 
-<body>
-The current average lighthouse performance score for the day is: <span id="score"></span> after <span id ="runs"></span> runs
-</body>
-<script>
-	var HOST = location.origin.replace(/^http/, 'ws')
-    var ws = new WebSocket(HOST);
-    // event emmited when connected
-    ws.onopen = function () {
-        console.log('websocket is connected ...')
-        // sending a send event to websocket server
-        ws.send('connected')
-    }
-    // event emmited when receiving message 
-    ws.onmessage = function (ev) {
-    	var payload = JSON.parse(ev.data);
-		document.querySelector("#score").innerHTML = payload.score;
-	    document.querySelector("#runs").innerHTML = payload.runs;
-    }
-</script>
+    <body>
+        <div class="logo">
+            <img src="https://ak.picdn.net/assets/base/error/logo-white-x2.png"/>
+            <h1>Lighthouse</h1>
+            <img src="https://developers.google.com/web/progressive-web-apps/images/pwa-lighthouse.png" height="75px"/>
+        </div>
+        <div class="desc">An app to run a Lighthouse audit on shutterstock.com every five minutes and aggregate the results.</div>
+        <div class="textScores">
+            <span id="lohp">
+                Today's Lighthouse performance score average for Logged Out Homepage is: 
+                    <span id="lohpScore" class="score"></span>. 
+                This script has run 
+                    <span id="lohpRuns" class="score"></span> times. 
+                <span id="lohpRunning" class="running"><img src="https://az620379.vo.msecnd.net/images/loading.gif" class="spinner"/></span>  
+            </span>
+            <br/>
+            <span id="adp">
+                Today's Lighthouse performance score average for Asset Details Page is: 
+                <span id="adpScore" class="score"></span>. 
+                This script has run 
+                <span id ="adpRuns" class="score"></span> times. 
+                <span id="adpRunning" class="running"><img src="https://az620379.vo.msecnd.net/images/loading.gif" class="spinner"/></span>
+            </span>
+            <br/>
+            <span id="cmsBase">
+                Today's Lighthouse performance score average for Base Web Contentful Page is: 
+                <span id="cmsBaseScore" class="score"></span>. 
+                This script has run 
+                <span id="cmsBaseRuns" class="score"></span> times. 
+                <span id="cmsBaseRunning" class="running"><img src="https://az620379.vo.msecnd.net/images/loading.gif" class="spinner"/></span>
+            </span>
+            <br/>
+            <span id="cmsStudio">
+                Today's Lighthouse performance score average for Studio Contentful Page is: 
+                <span id="cmsStudioScore" class="score"></span>. 
+                This script has run 
+                <span id="cmsStudioRuns" class="score"></span> times. 
+                <span id="cmsStudioRunning" class="running"><img src="https://az620379.vo.msecnd.net/images/loading.gif" class="spinner"/></span>
+            </span>
+            <br/>
+            <span id="search">
+                Today's Lighthouse performance score average for Search Results Page is: 
+                <span id="searchScore" class="score"></span>. 
+                This script has run 
+                <span id="searchRuns" class="score"></span> times. 
+                <span id="searchRunning" class="running"><img src="https://az620379.vo.msecnd.net/images/loading.gif" class="spinner"/></span>
+            </span>
+        </div>
+
+        <hr/>
+
+        <div id="logsContainer">
+            <div id="opportunitiesContainer">
+                <div id="opportunitiesTitle" class="headertTitle">Today's Performance Opportunities</div>
+                <div class="pageTitle">Logged Out Homepage</div>
+                <div class="url"><a class="lohpURL" href=""></a></div>
+                <div id="lohpOpportunities" class="opportunities"></div>
+                <div class="pageTitle">Asset Detail Page</div>
+                <div class="url"><a class="adpURL" href=""></a></div>
+                <div id="adpOpportunities" class="opportunities"></div>
+                <div class="pageTitle">Base Web Contentful Page</div>
+                <div class="url"><a class="cmsBaseURL" href=""></a></div>
+                <div id="cmsBaseOpportunities" class="opportunities"></div>
+                <div class="pageTitle">Studio Contentful Page</div>
+                <div class="url"><a class="cmsStudioURL" href=""></a></div>
+                <div id="cmsStudioOpportunities" class="opportunities"></div>
+                <div class="pageTitle">Search Results Page</div>
+                <div class="url"><a class="searchURL" href=""></a></div>
+                <div id="searchOpportunities" class="opportunities"></div>
+            </div>
+            <div class="averagesContainer">
+                <div id="averagesTitle" class="headertTitle">Today's Hourly Performance Score Averages</div>
+                <div class="pageTitle">Logged Out Homepage</div>
+                <div class="url"><a class="lohpURL" href=""></a></div>
+                <iframe src="/logs/performance_scores_lohp.txt" class="log"></iframe>
+                <div class="pageTitle">Asset Detail Page</div>
+                <div class="url"><a class="adpURL" href=""></a></div>
+                <iframe src="/logs/performance_scores_adp.txt" class="log"></iframe>
+                <div class="pageTitle">Base Web Contentful Page</div>
+                <div class="url"><a class="cmsBaseURL" href=""></a></div>
+                <iframe src="/logs/performance_scores_cmsBase.txt" class="log"></iframe>
+                <div class="pageTitle">Studio Contentful Page</div>
+                <div class="url"><a class="cmsStudioURL" href=""></a></div>
+                <iframe src="/logs/performance_scores_cmsStudio.txt" class="log"></iframe>
+                <div class="pageTitle">Search Results Page</div>
+                <div class="url"><a class="searchURL" href=""></a></div>
+                <iframe src="/logs/performance_scores_search.txt" class="log"></iframe>
+            </div>
+        </div>
+
+    </body>
+    <script src="/assets/scripts/main.js"></script>
 </html>

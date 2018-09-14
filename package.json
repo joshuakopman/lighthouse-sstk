@@ -11,12 +11,13 @@
     "js": "gulp js",
     "css": "gulp css",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node app.js"
+    "start": "node app.js"
   },
   "dependencies": {
+    "chrome-launcher": "*",
     "express": "*",
     "lighthouse": "*",
-    "chrome-launcher": "*",
+    "moment-timezone": "^0.5.21",
     "ws": "*"
   },
   "devDependencies": {
