@@ -1,16 +1,24 @@
 var LighthouseHelper = require('./LighthouseHelper');
-var globals = require('./globals'); 
+var Globals = require('./globals'); 
 const lighthouseHelper = new LighthouseHelper();
 
 var Runner = function(){
     return {
-        startAudit:function(wss){
-            setInterval(function(){
-                lighthouseHelper.runLighthouseReport(globals.lohp, function() {
-                    lighthouseHelper.runLighthouseReport(globals.adp, function() {
-                        lighthouseHelper.runLighthouseReport(globals.cmsStudioExplore, function() {
-                            lighthouseHelper.runLighthouseReport(globals.cmsStudioLOHP, function() {
-                                lighthouseHelper.runLighthouseReport(globals.search) 
+        startAudit : function(wss) {
+            var globals = new Globals();
+            setInterval(function() {
+                globals.testRunningID = globals.pages.lohp.pageType;
+                lighthouseHelper.runLighthouseReport(globals.pages.lohp, function() {
+                    globals.testRunningID = globals.pages.adp.pageType;
+                    lighthouseHelper.runLighthouseReport(globals.pages.adp, function() {
+                       globals.testRunningID = globals.pages.cmsStudioExplore.pageType;
+                        lighthouseHelper.runLighthouseReport(globals.pages.cmsStudioExplore, function() {
+                            globals.testRunningID = globals.pages.cmsStudioLOHP.pageType;
+                            lighthouseHelper.runLighthouseReport(globals.pages.cmsStudioLOHP, function() {
+                                globals.testRunningID = globals.pages.search.pageType;
+                                lighthouseHelper.runLighthouseReport(globals.pages.search, function() {
+                                  globals.testRunningID = "";
+                                }); 
                             }) 
                         })
                     })
@@ -21,12 +29,12 @@ var Runner = function(){
             setInterval(function(){
               for(var pageTypeIndex in globals.pageTypes){
                   var currentPage = globals.pageTypes[pageTypeIndex];
-                  if(globals[currentPage].dayReset == true) {
-                      lighthouseHelper.writeToLogsPerformance('w',"/logs/performance_scores_"+ currentPage +".txt",globals[currentPage].currentAverage.toFixed(2),globals[currentPage].noOfRuns);
-                      globals[currentPage].dayReset = false;
+                  if(globals.pages[currentPage].dayReset == true) {
+                      lighthouseHelper.writeToLogsPerformance('w',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(2),globals.pages[currentPage].noOfRuns);
+                      globals.pages[currentPage].dayReset = false;
                   }
                   else {
-                      lighthouseHelper.writeToLogsPerformance('a',"/logs/performance_scores_"+ currentPage +".txt",globals[currentPage].currentAverage.toFixed(2),globals[currentPage].noOfRuns);
+                      lighthouseHelper.writeToLogsPerformance('a',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(2),globals.pages[currentPage].noOfRuns);
                   }
               }
               //writeToLogsOpportunity('w','logs/opportunities_lohp.txt',opportunitiesglobals.lohp.;

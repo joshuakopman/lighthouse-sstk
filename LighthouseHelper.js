@@ -1,8 +1,6 @@
 var fs = require('fs');
 var moment = require('moment-timezone');
-var globals = require('./globals'); 
 var lighthouseLauncher = require('./LighthouseLauncher');
-
 const ONE_DAY =  24 * 60 * 60 * 1000;
 
 var LighthouseHelper = function(){
@@ -46,7 +44,6 @@ var LighthouseHelper = function(){
         },
         runLighthouseReport:function(page,callback){
             var self = this;
-            globals.testRunningID = page.pageType;
             new lighthouseLauncher().launchChromeAndRunLighthouse(page.url, {chromeFlags: ['--headless']}).then(results => {
                 setTimeout(() => {
                      if (results && results.categories && results.categories.performance.score) {
@@ -73,10 +70,6 @@ var LighthouseHelper = function(){
                            }
                     }
 
-                    if(globals.testRunningID == 'search'){
-                      globals.testRunningID = '';
-                    }
-                    
                     if(callback){
                       callback();
                     }

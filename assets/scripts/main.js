@@ -10,16 +10,16 @@
 
         for(var index in payload.globals.pageTypes){
             var currentPage = payload.globals.pageTypes[index];
-            document.querySelector("#" + currentPage + "Score").innerHTML = payload.globals[currentPage].currentAverage.toFixed(2);
-            document.querySelector("#" + currentPage + "Runs").innerHTML = payload.globals[currentPage].noOfRuns;
+            document.querySelector("#" + currentPage + "Score").innerHTML = payload.globals.pages[currentPage].currentAverage.toFixed(2);
+            document.querySelector("#" + currentPage + "Runs").innerHTML = payload.globals.pages[currentPage].noOfRuns;
 
-            if(payload.globals[currentPage].opportunitiesArray.length > 0){
-                document.querySelector("#" + currentPage + "Opportunities").innerHTML = formatOpsString(payload.globals[currentPage].opportunitiesArray);
+            if(payload.globals.pages[currentPage].opportunitiesArray.length > 0){
+                document.querySelector("#" + currentPage + "Opportunities").innerHTML = formatOpsString(payload.globals.pages[currentPage].opportunitiesArray);
             }
 
             document.querySelectorAll("." + currentPage + "URL").forEach(el => {
-                el.href = payload.globals[currentPage].url;
-                el.innerHTML = payload.globals[currentPage].url;
+                el.href = payload.globals.pages[currentPage].url;
+                el.innerHTML = payload.globals.pages[currentPage].url;
             });
         }
         
