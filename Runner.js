@@ -28,7 +28,7 @@ var Runner = function(){
             //Write to log file on host with current average perf score every hour in case server crashes; clear log daily
             setInterval(function(){
               for(var pageTypeIndex in globals.pageTypes){
-                  var currentPage = globals.pageTypes[pageTypeIndex];
+                  var currentPage = globals.pageTypes[pageTypeIndex].name;
                   if(globals.pages[currentPage].dayReset == true) {
                       lighthouseHelper.writeToLogsPerformance('w',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(2),globals.pages[currentPage].noOfRuns);
                       globals.pages[currentPage].dayReset = false;

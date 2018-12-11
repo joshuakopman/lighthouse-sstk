@@ -90,26 +90,4 @@ var LighthouseHelper = function(){
     }
 }
 
-/*function writeToLogsOpportunity(flag,filePath,ops){
-      var time = new moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
-      var stream = fs.createWriteStream(__dirname + filePath, {flags:flag});
-      stream.write("Current Top Opportunities at: " + time + "\n");
-      
-     /* var sorted = opportunitiesglobals.lohp..slice().sort(function(a, b) {
-        return b - a; 
-      });
-      
-
-      opportunitiesglobals.lohp.forEach(function(value,key) {       
-        stream.write(key+" " + value+ " times"+"\n");
-      });
-      
-      stream.end();
-      stream.on('error', function(err) {
-          console.log(err);
-          stream.end();
-      });
-}*/
-
-
 module.exports = LighthouseHelper;
