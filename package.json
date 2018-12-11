@@ -14,9 +14,9 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "chrome-launcher": "*",
+    "chrome-launcher": "0.10.5",
     "express": "*",
-    "lighthouse": "*",
+    "lighthouse": "4.0.0-beta",
     "moment-timezone": "^0.5.21",
     "ws": "*"
   },

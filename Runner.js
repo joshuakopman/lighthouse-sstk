@@ -8,8 +8,8 @@ var Runner = function(){
             setInterval(function(){
                 lighthouseHelper.runLighthouseReport(globals.lohp, function() {
                     lighthouseHelper.runLighthouseReport(globals.adp, function() {
-                        lighthouseHelper.runLighthouseReport(globals.cmsBase, function() {
-                            lighthouseHelper.runLighthouseReport(globals.cmsStudio, function() {
+                        lighthouseHelper.runLighthouseReport(globals.cmsStudioExplore, function() {
+                            lighthouseHelper.runLighthouseReport(globals.cmsStudioLOHP, function() {
                                 lighthouseHelper.runLighthouseReport(globals.search) 
                             }) 
                         })
