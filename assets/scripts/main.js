@@ -7,7 +7,6 @@
 
     ws.onmessage = function (ev) {
         var payload = JSON.parse(ev.data);
-
         for(var index in payload.globals.pageTypes){
             var currentPage = payload.globals.pageTypes[index];
             document.querySelector("#" + currentPage + "Score").innerHTML = payload.globals.pages[currentPage].currentAverage.toFixed(2);
