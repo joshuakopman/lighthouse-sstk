@@ -4,18 +4,7 @@
             <img src="https://developers.google.com/web/progressive-web-apps/images/pwa-lighthouse.png" height="75px"/>
         </div>
         <div class="desc">An app to run a Lighthouse audit on shutterstock.com every five minutes and aggregate the results.</div>
-        <div class="textScores">
-        {{#each pageTypes}}
-            <span id="{{this.name}}">
-                Today's Lighthouse performance score average for {{this.title}} is: 
-                    <span id="{{this.name}}Score" class="score"></span>. 
-                This script has run 
-                    <span id="{{this.name}}Runs" class="score"></span> times. 
-                <span id="{{this.name}}Running" class="running"><img src="https://az620379.vo.msecnd.net/images/loading.gif" class="spinner"/></span>  
-            </span>
-            <br/>
-        {{/each}}
-        </div>
+        <div id="textScoresContainer" class="textScores"></div>
 
         <hr/>
 
@@ -38,4 +27,3 @@
             </div>
         </div>
 
-        <div id="like_button_container"></div>

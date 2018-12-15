@@ -12,6 +12,7 @@ const server = express()
   .set('view engine', 'handlebars')
   .use('/logs', express.static('logs'))
   .use('/assets', express.static('assets'))
+  .use('/types',(req, res) => res.json({ "pageTypes" : pageTypes }))
   .use('/',(req, res) => res.render('index',{ "pageTypes" : pageTypes }))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
