@@ -7,16 +7,21 @@ var Runner = function(){
         startAudit : function(wss) {
             var globals = new Globals();
             setInterval(function() {
-                globals.testRunningID = globals.pages.lohp.pageType;
-                lighthouseHelper.runLighthouseReport(globals.pages.lohp, function() {
-                    globals.testRunningID = globals.pages.adp.pageType;
-                    lighthouseHelper.runLighthouseReport(globals.pages.adp, function() {
-                       globals.testRunningID = globals.pages.cmsStudioExplore.pageType;
-                        lighthouseHelper.runLighthouseReport(globals.pages.cmsStudioExplore, function() {
-                            globals.testRunningID = globals.pages.cmsStudioLOHP.pageType;
-                            lighthouseHelper.runLighthouseReport(globals.pages.cmsStudioLOHP, function() {
-                                globals.testRunningID = globals.pages.search.pageType;
-                                lighthouseHelper.runLighthouseReport(globals.pages.search, function() {
+                var currentPage = globals.pageTypes[0].name;
+                globals.testRunningID = currentPage;
+                lighthouseHelper.runLighthouseReport(globals.pages[currentPage], function() {
+                  var currentPage = globals.pageTypes[1].name;
+                  globals.testRunningID = currentPage;
+                    lighthouseHelper.runLighthouseReport(globals.pages[currentPage], function() {
+                        var currentPage = globals.pageTypes[2].name;
+                        globals.testRunningID = currentPage;
+                        lighthouseHelper.runLighthouseReport(globals.pages[currentPage], function() {
+                            var currentPage = globals.pageTypes[3].name;
+                            globals.testRunningID = currentPage;
+                            lighthouseHelper.runLighthouseReport(globals.pages[currentPage], function() {
+                                var currentPage = globals.pageTypes[4].name;
+                                globals.testRunningID = currentPage;
+                                lighthouseHelper.runLighthouseReport(globals.pages[currentPage], function() {
                                   globals.testRunningID = "";
                                 }); 
                             }) 
