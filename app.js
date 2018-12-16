@@ -8,7 +8,7 @@ const SocketServer = require('ws').Server;
 const PORT = process.env.PORT || 3000;
 const server = express()
   .use('/logs', express.static('logs'))
-  .use('/src', express.static('src'))
+  .use('/assets', express.static('assets'))
   .use('/dist', express.static('dist'))
   .use('/types',(req, res) => res.json({ "pageTypes" : pageTypes }))
   .use('/',(req, res) => res.sendFile('index.html', { root: __dirname + '/src' }))
