@@ -14,4 +14,8 @@ npm run start  //webpack
 node app.js //express and socket server
 ```
 
-Customize all URLs and Page titles in `pageTypes.js`
+Customize all URLs and Page titles in `pageTypes.js`. Name log files with convention `performance_scores_{pageName}.txt`
+
+## Additional Notes
+
+This app runs a headless instance of Chrome on a throttled (3G mobile) connection
