@@ -1,8 +1,8 @@
 {
-  "name": "sample",
+  "name": "Lighthouse-runner",
   "private": true,
-  "homepage": "https://github.com/cssmagic/{sample}",
-  "author": "cssmagic <cssmagic.cn@gmail.com>",
+  "homepage": "https://github.com/joshkopman/",
+  "author": "Josh Kopman <joshkopman@gmail.com>",
   "description": "{Description of Sample}",
   "license": "MIT",
   "scripts": {
