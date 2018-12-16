@@ -1,6 +1,5 @@
 var express = require('express');
 var Runner = require('./Runner');
-var exphbs  = require('express-handlebars');
 var pageTypes = require('./pageTypes');
 
 
@@ -8,12 +7,11 @@ const runner = new Runner();
 const SocketServer = require('ws').Server;
 const PORT = process.env.PORT || 3000;
 const server = express()
-  .engine('handlebars', exphbs({defaultLayout: 'main'}))
-  .set('view engine', 'handlebars')
   .use('/logs', express.static('logs'))
-  .use('/assets', express.static('assets'))
+  .use('/src', express.static('src'))
+  .use('/dist', express.static('dist'))
   .use('/types',(req, res) => res.json({ "pageTypes" : pageTypes }))
-  .use('/',(req, res) => res.render('index',{ "pageTypes" : pageTypes }))
+  .use('/',(req, res) => res.sendFile('index.html', { root: __dirname + '/src' }))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const wss = new SocketServer({ server })

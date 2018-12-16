@@ -6,12 +6,16 @@
     }
 
     ws.onmessage = function (ev) {
+
         var payload = JSON.parse(ev.data);
         for(var index in payload.globals.pageTypes){
             var currentPage = payload.globals.pageTypes[index].name;
-            document.querySelector("#" + currentPage + "Score").innerHTML = payload.globals.pages[currentPage].currentAverage.toFixed(2);
-            document.querySelector("#" + currentPage + "Runs").innerHTML = payload.globals.pages[currentPage].noOfRuns;
-
+            if(document.querySelector("#" + currentPage + "Score")){
+                document.querySelector("#" + currentPage + "Score").innerHTML = payload.globals.pages[currentPage].currentAverage.toFixed(2);
+            }
+            if(document.querySelector("#" + currentPage + "Runs")){
+                document.querySelector("#" + currentPage + "Runs").innerHTML = payload.globals.pages[currentPage].noOfRuns;
+            }
             if(payload.globals.pages[currentPage].opportunitiesArray.length > 0){
                 document.querySelector("#" + currentPage + "Opportunities").innerHTML = formatOpsString(payload.globals.pages[currentPage].opportunitiesArray);
             }

@@ -44,7 +44,7 @@ USER pptruser
 
 RUN npm install 
 
-RUN npx babel assets/scripts --out-dir assets/compiled --presets react-app/prod
+RUN npm run build
 
 ENTRYPOINT ["dumb-init", "--"]
 #CMD ["google-chrome-unstable"]
