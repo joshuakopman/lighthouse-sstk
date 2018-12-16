@@ -2,6 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TextScore from './TextScore.js';
+import Opportunity from './Opportunity.js';
+import Average from './Average.js';
 
 class LighthouseContainer extends React.Component {
   constructor(props) {
@@ -36,26 +38,17 @@ class LighthouseContainer extends React.Component {
              })}
          </div>
           <hr/>
-
           <div id="logsContainer">
               <div id="opportunitiesContainer">
                   <div id="opportunitiesTitle" className="headerTitle">Today's Performance Opportunities</div>
                   {pageTypes.map((pageType) => {
-                    return <div>
-                      <div className="pageTitle">{pageType.title}</div>
-                      <div className="url"><a href="" className={pageType.name + "URL"}></a></div>
-                      <div id={pageType.name + "Opportunities"} className="opportunities"></div>
-                    </div>
+                    return <Opportunity {...pageType} />
                   })}
               </div>
               <div className="averagesContainer">
                   <div id="averagesTitle" className="headerTitle">Today's Hourly Performance Score Averages</div>
                   {pageTypes.map((pageType) => {
-                    return <div>                  
-                      <div className="pageTitle">{pageType.title}</div>
-                      <div className="url"><a href="" className={pageType.name + "URL"}></a></div>
-                      <iframe src={"/logs/performance_scores_" + pageType.name + ".txt"} className="log"></iframe>
-                    </div>
+                    return <Average {...pageType} />
                 })}
               </div>
           </div>
