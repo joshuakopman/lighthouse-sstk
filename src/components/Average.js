@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-export default class TextScore extends React.Component {
+export default class Average extends React.Component {
   constructor(props) {
     super(props);
   }

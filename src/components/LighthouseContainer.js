@@ -27,7 +27,7 @@ export default class LighthouseContainer extends React.Component {
       this.state.ws.onmessage = ev => {
         var payload = JSON.parse(ev.data);
         this.setState({ pages : payload.globals.pages }); 
-        this.showActiveTest(payload.globals.testRunningID);
+        this.setState({ testRunningID : payload.globals.testRunningID});
       }
   }
 
@@ -38,6 +38,7 @@ export default class LighthouseContainer extends React.Component {
   render() {
       const pageTypes = this.state.pageTypes;
       var pages = this.state.pages;
+      var testRunningID = this.state.testRunningID;
 
       return(
          <div>
@@ -50,7 +51,7 @@ export default class LighthouseContainer extends React.Component {
           <div id="textScoresContainer" className="textScores">
             {pageTypes.map((pageType) => {
               if(pages[pageType.name]) {
-                return <TextScore {...pageType} page={pages[pageType.name]}  />
+                return <TextScore {...pageType} page={pages[pageType.name]} testRunningID={testRunningID}  />
               }
              })}
          </div>
@@ -78,7 +79,7 @@ export default class LighthouseContainer extends React.Component {
  }
 
 
- showActiveTest(ID){
+/* showActiveTest(ID){
          document.querySelectorAll('.textScores span').forEach(el => {
             el.style.color = 'black';
          });    
@@ -98,5 +99,5 @@ export default class LighthouseContainer extends React.Component {
             document.querySelector("#"+ID+"Runs").style.color = 'white';
             document.querySelector("#"+ID+"Running").style.display = 'inline';
         }
-    }
+    }*/
 }

@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-export default class TextScore extends React.Component {
+export default class Opportunity extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -14,7 +14,7 @@ export default class TextScore extends React.Component {
           <div id={this.props.name + "Opportunities"} className="opportunities">
                   {this.props.opportunities.map((opportunity) => {
                     return  <span>
-                        <span style={{"font-weight":"bold"}}>{opportunity.description}</span> 
+                        <span style={{"fontWeight":"bold"}}>{opportunity.description}</span> 
                         <span>| Count:</span>
                         <span style={{"color":"red"}}>{opportunity.count}</span> 
                         <span>|  Time Savings: </span>
