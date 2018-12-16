@@ -42,11 +42,11 @@ var Runner = function(){
                       lighthouseHelper.writeToLogsPerformance('a',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(2),globals.pages[currentPage].noOfRuns);
                   }
               }
-              //writeToLogsOpportunity('w','logs/opportunities_lohp.txt',opportunitiesglobals.lohp.;
 
             },3600000);
         
             wss.on('connection', function (ws) {
+              console.log('connected to server');
                 var scoreSocketID = setInterval(function(){
                     try{
                         ws.send(JSON.stringify(

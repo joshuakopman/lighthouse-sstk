@@ -10,7 +10,7 @@ export default class TextScore extends React.Component {
     return (
         <div>                  
           <div className="pageTitle">{this.props.title}</div>
-          <div className="url"><a href="" className={this.props.name + "URL"}></a></div>
+          <div className="url"><a href={this.props.url} className={this.props.name + "URL"}>{this.props.url}</a></div>
           <iframe src={"/logs/performance_scores_" + this.props.name + ".txt"} className="log"></iframe>
         </div>
   )

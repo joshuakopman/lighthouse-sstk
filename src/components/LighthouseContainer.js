@@ -11,11 +11,11 @@ export default class LighthouseContainer extends React.Component {
     super(props);
     this.state = {
       pageTypes : [],
+      pages : {},
+      ws : new WebSocket(location.origin.replace(/^http/, 'ws'))
     };
-    this.host = location.origin.replace(/^http/, 'ws');
-    this.ws = new WebSocket(this.host)
   }
-
+  
   componentDidMount() {
     fetch('/types') 
       .then(response => response.json())
@@ -24,37 +24,21 @@ export default class LighthouseContainer extends React.Component {
         this.setState({ pageTypes : pageTypes }); 
       })
 
-    this.ws.onmessage = function (ev) { 
-      var payload = JSON.parse(ev.data);
-       for(var index in payload.globals.pageTypes){
-            var currentPage = payload.globals.pageTypes[index].name;
-            if(document.querySelector("#" + currentPage + "Score")){
-                document.querySelector("#" + currentPage + "Score").innerHTML = payload.globals.pages[currentPage].currentAverage.toFixed(2);
-            }
-            if(document.querySelector("#" + currentPage + "Runs")){
-                document.querySelector("#" + currentPage + "Runs").innerHTML = payload.globals.pages[currentPage].noOfRuns;
-            }
-            if(payload.globals.pages[currentPage].opportunitiesArray.length > 0){
-                document.querySelector("#" + currentPage + "Opportunities").innerHTML = formatOpsString(payload.globals.pages[currentPage].opportunitiesArray);
-            }
-
-            document.querySelectorAll("." + currentPage + "URL").forEach(el => {
-                el.href = payload.globals.pages[currentPage].url;
-                el.innerHTML = payload.globals.pages[currentPage].url;
-            });
-        }
-
-        showActiveTest(payload.globals.testRunningID);
-
-    }
+      this.state.ws.onmessage = ev => {
+        var payload = JSON.parse(ev.data);
+        this.setState({ pages : payload.globals.pages }); 
+        this.showActiveTest(payload.globals.testRunningID);
+      }
   }
 
   componentWillUnmount() {
-    this.ws.close();
+    this.state.ws.close();
   }
 
   render() {
       const pageTypes = this.state.pageTypes;
+      var pages = this.state.pages;
+
       return(
          <div>
            <div className="logo">
@@ -65,7 +49,9 @@ export default class LighthouseContainer extends React.Component {
           <div className="desc">An app to run a Lighthouse audit every five minutes and aggregate the results.</div>
           <div id="textScoresContainer" className="textScores">
             {pageTypes.map((pageType) => {
-               return <TextScore {...pageType} />
+              if(pages[pageType.name]) {
+                return <TextScore {...pageType} page={pages[pageType.name]}  />
+              }
              })}
          </div>
           <hr/>
@@ -73,13 +59,17 @@ export default class LighthouseContainer extends React.Component {
               <div id="opportunitiesContainer">
                   <div id="opportunitiesTitle" className="headerTitle">Today's Performance Opportunities</div>
                   {pageTypes.map((pageType) => {
-                    return <Opportunity {...pageType} />
+                    if(pages[pageType.name] && pages[pageType.name].opportunitiesArray) {
+                      return <Opportunity {...pageType} opportunities={pages[pageType.name].opportunitiesArray} />
+                    }
                   })}
               </div>
               <div className="averagesContainer">
                   <div id="averagesTitle" className="headerTitle">Today's Hourly Performance Score Averages</div>
                   {pageTypes.map((pageType) => {
-                    return <Average {...pageType} />
+                    if(pages[pageType.name]) {
+                       return <Average {...pageType} page={pages[pageType.name]} />
+                    }
                 })}
               </div>
           </div>
@@ -87,15 +77,6 @@ export default class LighthouseContainer extends React.Component {
   );
  }
 
- formatOpsString(opportunities){
-        var opString = '';
-        for(var index in opportunities){   
-            if(opportunities[index] && opportunities[index].overallSavingsMs > 0){
-              opString += "<span style=\"font-weight:bold\">"+ opportunities[index].description + "</span> |  Count: <span style=\"color:red\">" + opportunities[index].count + "</span> |  Time Savings: <span style=\"color:red\">" + opportunities[index].overallSavingsMs.toFixed(2) + " ms</span><br></br>";
-            }
-        }
-        return opString;
-    }
 
  showActiveTest(ID){
          document.querySelectorAll('.textScores span').forEach(el => {
