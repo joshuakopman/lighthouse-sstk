@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Opportunity extends React.Component {
   constructor(props) {
@@ -8,24 +9,20 @@ export default class Opportunity extends React.Component {
 
   render() {
     return (
-        <div>
-          <div className="pageTitle">{this.props.title}</div>
-          <div className="url"><a href="" className={this.props.name + "URL"}></a></div>
-          <div id={this.props.name + "Opportunities"} className="opportunities">
-                  {this.props.opportunities.map((opportunity) => {
-                    return  <span>
-                        <span style={{"fontWeight":"bold"}}>{opportunity.description}</span> 
-                        <span>| Count:</span>
-                        <span style={{"color":"red"}}>{opportunity.count}</span> 
-                        <span>|  Time Savings: </span>
-                        <span style={{"color":"red"}}>{opportunity.overallSavingsMs.toFixed(2) + "ms"}</span>
-                        <br></br>
-                      </span>
-                   })
-                  }
-          </div>
-       </div>
-  )
+        <span>
+          <span style={{"fontWeight":"bold"}}>{this.props.description}</span> 
+          <span>| Count:</span>
+          <span style={{"color":"red"}}>{this.props.count}</span> 
+          <span>|  Time Savings: </span>
+          <span style={{"color":"red"}}>{this.props.overallSavingsMs.toFixed(2) + "ms"}</span>
+          <br></br>
+        </span>
+)
  }
 }
 
+Opportunity.propTypes = {
+  description: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
+  overallSavingsMs: PropTypes.number.isRequired
+};

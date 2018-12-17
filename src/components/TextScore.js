@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class TextScore extends React.Component {
   constructor(props) {
@@ -24,3 +25,8 @@ export default class TextScore extends React.Component {
   }
 }
 
+TextScore.propTypes = {
+  name: PropTypes.string.isRequired,
+  testRunningID: PropTypes.string.isRequired,
+  page: PropTypes.object.isRequired,
+};

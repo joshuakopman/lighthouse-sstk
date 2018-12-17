@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import TextScore from './TextScore.js';
-import Opportunity from './Opportunity.js';
+import OpportunityList from './OpportunityList.js';
 import Average from './Average.js';
 
 
@@ -12,8 +12,9 @@ export default class LighthouseContainer extends React.Component {
     this.state = {
       pageTypes : [],
       pages : {},
-      ws : new WebSocket(location.origin.replace(/^http/, 'ws'))
+      testRunningID: ''
     };
+    this.ws = new WebSocket(location.origin.replace(/^http/, 'ws'))
   }
   
   componentDidMount() {
@@ -24,7 +25,7 @@ export default class LighthouseContainer extends React.Component {
         this.setState({ pageTypes : pageTypes }); 
       })
 
-      this.state.ws.onmessage = ev => {
+      this.ws.onmessage = ev => {
         var payload = JSON.parse(ev.data);
         this.setState({ pages : payload.globals.pages }); 
         this.setState({ testRunningID : payload.globals.testRunningID});
@@ -32,7 +33,7 @@ export default class LighthouseContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.state.ws.close();
+    this.ws.close();
   }
 
   render() {
@@ -61,7 +62,7 @@ export default class LighthouseContainer extends React.Component {
                   <div id="opportunitiesTitle" className="headerTitle">Today's Performance Opportunities</div>
                   {pageTypes.map((pageType) => {
                     if(pages[pageType.name] && pages[pageType.name].opportunitiesArray) {
-                      return <Opportunity {...pageType} opportunities={pages[pageType.name].opportunitiesArray} />
+                      return <OpportunityList {...pageType} opportunities={pages[pageType.name].opportunitiesArray} />
                     }
                   })}
               </div>
@@ -77,27 +78,8 @@ export default class LighthouseContainer extends React.Component {
       </div>
   );
  }
-
-
-/* showActiveTest(ID){
-         document.querySelectorAll('.textScores span').forEach(el => {
-            el.style.color = 'black';
-         });    
-
-         document.querySelectorAll('.score').forEach(el => {
-            el.style.color = '#f54336';
-         });    
-
-         document.querySelectorAll('.running').forEach(el => {
-            el.style.display = 'none';
-         });
-        
-
-        if(ID != '') {
-            document.querySelector("#"+ID).style.color = 'white';
-            document.querySelector("#"+ID+"Score").style.color = 'white';
-            document.querySelector("#"+ID+"Runs").style.color = 'white';
-            document.querySelector("#"+ID+"Running").style.display = 'inline';
-        }
-    }*/
 }
+
+
+
+

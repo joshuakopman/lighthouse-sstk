@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Average extends React.Component {
   constructor(props) {
@@ -17,3 +18,8 @@ export default class Average extends React.Component {
  }
 }
 
+Average.propTypes = {
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
