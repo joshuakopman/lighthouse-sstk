@@ -14,8 +14,8 @@ export default class OpportunityList extends React.Component {
           <div className="pageTitle">{this.props.title}</div>
           <div className="url"><a href="" className={this.props.name + "URL"}></a></div>
           <div id={this.props.name + "Opportunities"} className="opportunities">
-                  {this.props.opportunities.map((opportunity) => {
-                    return  <Opportunity {...opportunity} />
+                  {this.props.opportunities.map((opportunity, index) => {
+                    return  <Opportunity key={this.props.title + "opportunity" + index} {...opportunity} />
                    })
                   }
           </div>

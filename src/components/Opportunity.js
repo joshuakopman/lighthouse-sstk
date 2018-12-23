@@ -10,11 +10,11 @@ export default class Opportunity extends React.Component {
   render() {
     return (
         <span>
-          <span style={{"fontWeight":"bold"}}>{this.props.description}</span> 
+          <span className="bold">{this.props.description}</span> 
           <span>| Count:</span>
-          <span style={{"color":"red"}}>{this.props.count}</span> 
+          <span className="red">{this.props.count}</span> 
           <span>|  Time Savings: </span>
-          <span style={{"color":"red"}}>{this.props.overallSavingsMs.toFixed(2) + "ms"}</span>
+          <span className="red">{this.props.overallSavingsMs.toFixed(2) + "ms"}</span>
           <br></br>
         </span>
 )
