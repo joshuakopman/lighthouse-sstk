@@ -5,6 +5,11 @@ module.exports = pageTypes = [
       "url":'https://www.shutterstock.com'
     },
     {
+      "name": "cmsStudioLOHP",
+      "title": "Studio Contentful LOHP Page",
+      "url":"https://www.shutterstock.com/discover/test-home-page"
+    },
+    {
       "name": "footage",
       "title": "Footage Homepage - Akamai",
       "url":"https://www.shutterstock.com/video"
@@ -13,11 +18,6 @@ module.exports = pageTypes = [
       "name": "cmsStudioExplore",
       "title": "Studio Contentful Explore Page",
       "url":"https://www.shutterstock.com/explore/royalty-free-images"
-    },
-     {
-      "name": "cmsStudioLOHP",
-      "title": "Studio Contentful LOHP Page",
-      "url":"https://www.shutterstock.com/discover/test-home-page"
     },
     {
       "name": "search",
