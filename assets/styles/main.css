@@ -88,3 +88,21 @@ h1{
     font-weight: bold;
     background: lightgrey;
 }
+.active{
+    color: white;
+}
+.inactive{
+    color: black;
+}
+.red{
+    color: #f54336;
+}
+.showSpinner{
+    display: inline;
+}
+.hideSpinner{
+    display: none;
+}
+.bold{
+    font-weight: bold;
+}
