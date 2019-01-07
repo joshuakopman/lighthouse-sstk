@@ -50,10 +50,21 @@ var LighthouseHelper = function(){
                           page.currentScore = results.categories.performance.score * 100;
                           page.currentBuffer.push(page.currentScore);
 
+                          if(results.audits && results.audits["time-to-first-byte"]){
+                            page.currentTTFB = results.audits["time-to-first-byte"].rawValue;
+                            page.currentTTFBBuffer.push(page.currentTTFB);
+                          }
+
                           if(page.currentAverage != 0) {
                              page.currentAverage = page.currentBuffer.reduce(self.getSum) / page.currentBuffer.length;
                           }else{
                              page.currentAverage = page.currentScore;
+                          }
+
+                          if(page.currentTTFBAverage != 0) {
+                             page.currentTTFBAverage = page.currentTTFBBuffer.reduce(self.getSum) / page.currentTTFBBuffer.length;
+                          }else{
+                             page.currentTTFBAverage = page.currentTTFB;
                           }
 
                           self.getOpportunities(results,page);
@@ -63,6 +74,9 @@ var LighthouseHelper = function(){
                           if(new Date() - page.startTime >= ONE_DAY){
                               page.currentBuffer = [];
                               page.currentAverage = 0;
+                              page.currentTTFBAverage = 0;
+                              page.currentTTFB = 0;
+                              page.currentTTFBBuffer = [];
                               page.currentScore = 0;
                               page.noOfRuns = 0;
                               page.startTime = new Date();
@@ -77,10 +91,10 @@ var LighthouseHelper = function(){
                  }, 2000);
             });
         },
-        writeToLogsPerformance:function(flag,filePath,avg,noOfRuns){
+        writeToLogsPerformance:function(flag,filePath,avg,avgTTFB,noOfRuns){
               var time = new moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
               var stream = fs.createWriteStream(__dirname + filePath, {flags:flag});
-              stream.write("Current Average Performance: " + avg + " at time: "+ time +" after "+noOfRuns+" runs\n");
+              stream.write("Performance: " + avg + " | TTFB: " + avgTTFB + "ms | "+ time +" | "+noOfRuns+" runs\n");
               stream.end();
               stream.on('error', function(err) {
                   console.log(err);

@@ -35,11 +35,11 @@ var Runner = function(){
               for(var pageTypeIndex in globals.pageTypes){
                   var currentPage = globals.pageTypes[pageTypeIndex].name;
                   if(globals.pages[currentPage].dayReset == true) {
-                      lighthouseHelper.writeToLogsPerformance('w',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(2),globals.pages[currentPage].noOfRuns);
+                      lighthouseHelper.writeToLogsPerformance('w',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(1),globals.pages[currentPage].currentTTFBAverage.toFixed(),globals.pages[currentPage].noOfRuns);
                       globals.pages[currentPage].dayReset = false;
                   }
                   else {
-                      lighthouseHelper.writeToLogsPerformance('a',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(2),globals.pages[currentPage].noOfRuns);
+                      lighthouseHelper.writeToLogsPerformance('a',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(1),globals.pages[currentPage].currentTTFBAverage.toFixed(),globals.pages[currentPage].noOfRuns);
                   }
               }
 

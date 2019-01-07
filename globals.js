@@ -11,10 +11,16 @@ module.exports = class Globals {
             var pageTypeUrl = pageTypes[index].url;
             this.pages[pageTypeName] = {};
             this.pages[pageTypeName].url = '';
-            this.pages[pageTypeName].currentAverage = 0;
             this.pages[pageTypeName].noOfRuns = 0;
+
+            this.pages[pageTypeName].currentAverage = 0;
             this.pages[pageTypeName].currentScore = 0;
             this.pages[pageTypeName].currentBuffer = [];
+
+            this.pages[pageTypeName].currentTTFB = 0;
+            this.pages[pageTypeName].currentTTFBBuffer = [];
+            this.pages[pageTypeName].currentTTFBAverage = 0;
+
             this.pages[pageTypeName].dayReset = false;
             this.pages[pageTypeName].opportunities = new Map();
             this.pages[pageTypeName].opportunitiesArray = [];
