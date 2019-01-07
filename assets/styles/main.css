@@ -4,47 +4,39 @@ body{
     width: 1400px;
     background: lightgrey;
 }
-
 h1{
     color: #f54336;
     font-size: 72px;
     display: inline;
 }
-
 #logsContainer{
     width:1500px;
 }
-
 .score{
     color: #f54336;
     font-weight: bold;
 }
-
 .url{
     background: lightgrey;
     font-weight: normal;
     font-size: 11px;
 }
-
 .textScores{
     text-align: left;
     margin: 0px auto;
     width: 850px;
     font-weight: bold;
 }
-
 .desc{
     margin: 20px;
     font-weight: bold;
     font-size: 14px;
     color: grey;
 }
-
 .logo{
     width: 700px;
     margin: 0px auto;
 }
-
 .averagesContainer{
     margin-top: 25px;
     font-weight: bold;
@@ -52,7 +44,6 @@ h1{
     background:lightgrey;
     padding-bottom: 15px;
 }
-
 .log{
     width: 625px;
     margin-top: 8px;
@@ -60,16 +51,13 @@ h1{
     margin-bottom: 20px;
     height: 210px;
 }
-
 .running{
     display: none;
 }
-
 .spinner{
     height:15px;
     width:15px;
 }
-
 #opportunitiesContainer {
     background:white;
     width:450px;
@@ -79,7 +67,6 @@ h1{
     margin-right: 200px;
     margin-left: 100px;
 }
-
 .opportunities{
     text-align: left;
     max-height: 200px;
@@ -89,7 +76,6 @@ h1{
     border-bottom:20px solid lightgrey;
     border-top:15px solid lightgrey;
 }
-
 .headerTitle{
     background: grey;
     font-weight: bold;
@@ -97,7 +83,6 @@ h1{
     height: 25px;
     border-bottom: 20px solid lightgrey;
 }
-
 .pageTitle{
     color: black;
     font-weight: bold;

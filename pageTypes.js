@@ -1,13 +1,13 @@
 module.exports = pageTypes = [
     {
       "name": "lohp",
-      "title": "Logged Out Homepage",
+      "title": "Base LOHP Page",
       "url":'https://www.shutterstock.com'
     },
     {
-      "name": "adp",
-      "title": "Asset Detail Page",
-      "url":"https://www.shutterstock.com/image-photo/happy-owner-carry-new-labrador-retriever-780540799"
+      "name": "footage",
+      "title": "Footage Homepage - Akamai",
+      "url":"https://www.shutterstock.com/video"
     },
     {
       "name": "cmsStudioExplore",
