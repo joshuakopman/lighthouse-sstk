@@ -1,7 +1,7 @@
 var fs = require('fs');
 var moment = require('moment-timezone');
 var lighthouseLauncher = require('./LighthouseLauncher');
-const ONE_DAY =  24 * 60 * 60 * 1000;
+const constants = require('./constants');
 
 var LighthouseHelper = function(){
 
@@ -42,46 +42,58 @@ var LighthouseHelper = function(){
         getSum:function(total, num) {
             return total + num;
         },
+        setMetricsMap(page,key,value){
+          if(!page.metrics.get(key)){
+            page.metrics.set(key,
+            { 
+              currentScore: value,
+              currentBuffer : [],
+              currentAverage : 0
+            })
+          }
+
+          var currentMetric = page.metrics.get(key)
+          currentMetric.currentBuffer.push(value);
+          currentMetric.currentScore = value;
+          if(currentMetric.currentAverage !=0){
+              currentMetric.currentAverage = currentMetric.currentBuffer.reduce(this.getSum) / currentMetric.currentBuffer.length;
+          }else {
+              currentMetric.currentAverage = currentMetric.currentScore;
+          }
+
+          page.metrics.set(key,currentMetric);
+        },
         runLighthouseReport:function(page,callback){
             var self = this;
             new lighthouseLauncher().launchChromeAndRunLighthouse(page.url, {chromeFlags: ['--headless']}).then(results => {
                 setTimeout(() => {
-                     if (results && results.categories && results.categories.performance.score) {
-                          page.currentScore = results.categories.performance.score * 100;
-                          page.currentBuffer.push(page.currentScore);
+                     if (results) {
+                        if(results.categories && results.categories.performance.score){
+                          self.setMetricsMap(page,PerformanceKey,results.categories.performance.score * 100);
+                        }
 
-                          if(results.audits && results.audits["time-to-first-byte"]){
-                            page.currentTTFB = results.audits["time-to-first-byte"].rawValue;
-                            page.currentTTFBBuffer.push(page.currentTTFB);
-                          }
+                        if(results.audits && results.audits["time-to-first-byte"]){
+                          self.setMetricsMap(page,TimeToFirstByteKey,results.audits["time-to-first-byte"].rawValue);
+                        }
+                        page.metricsArray = [];
+                        page.metrics.forEach(function(value, key, map){
+                            item = {};
+                            item.name = key;
+                            item.currentScore = value.currentScore;
+                            item.currentAverage = value.currentAverage;
+                            page.metricsArray.push(item);
+                        });
 
-                          if(page.currentAverage != 0) {
-                             page.currentAverage = page.currentBuffer.reduce(self.getSum) / page.currentBuffer.length;
-                          }else{
-                             page.currentAverage = page.currentScore;
-                          }
+                        self.getOpportunities(results,page);
 
-                          if(page.currentTTFBAverage != 0) {
-                             page.currentTTFBAverage = page.currentTTFBBuffer.reduce(self.getSum) / page.currentTTFBBuffer.length;
-                          }else{
-                             page.currentTTFBAverage = page.currentTTFB;
-                          }
+                        page.noOfRuns++;
 
-                          self.getOpportunities(results,page);
-
-                          page.noOfRuns++;
-
-                          if(new Date() - page.startTime >= ONE_DAY){
-                              page.currentBuffer = [];
-                              page.currentAverage = 0;
-                              page.currentTTFBAverage = 0;
-                              page.currentTTFB = 0;
-                              page.currentTTFBBuffer = [];
-                              page.currentScore = 0;
-                              page.noOfRuns = 0;
-                              page.startTime = new Date();
-                              page.dayReset = true;
-                           }
+                        if(new Date() - page.startTime >= ONE_DAY){
+                            page.metrics = new Map();
+                            page.noOfRuns = 0;
+                            page.startTime = new Date();
+                            page.dayReset = true;
+                        }
                     }
 
                     if(callback){

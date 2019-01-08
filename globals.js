@@ -12,21 +12,15 @@ module.exports = class Globals {
             this.pages[pageTypeName] = {};
             this.pages[pageTypeName].url = '';
             this.pages[pageTypeName].noOfRuns = 0;
-
-            this.pages[pageTypeName].currentAverage = 0;
-            this.pages[pageTypeName].currentScore = 0;
-            this.pages[pageTypeName].currentBuffer = [];
-
-            this.pages[pageTypeName].currentTTFB = 0;
-            this.pages[pageTypeName].currentTTFBBuffer = [];
-            this.pages[pageTypeName].currentTTFBAverage = 0;
-
             this.pages[pageTypeName].dayReset = false;
             this.pages[pageTypeName].opportunities = new Map();
             this.pages[pageTypeName].opportunitiesArray = [];
+            this.pages[pageTypeName].metricsArray = [];
             this.pages[pageTypeName].startTime = new Date();
             this.pages[pageTypeName].pageType = pageTypeName;
             this.pages[pageTypeName].url = pageTypeUrl;
+
+            this.pages[pageTypeName].metrics = new Map();
         }
     }
 }

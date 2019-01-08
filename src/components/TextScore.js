@@ -11,14 +11,16 @@ export default class TextScore extends React.Component {
     var colorRunningClass = (this.props.name == this.props.testRunningID) ? "active" : "inactive";
     var colorScoreClass = (this.props.name == this.props.testRunningID) ? "active" : "red";
     var displaySpinnerClass = (this.props.name == this.props.testRunningID) ? "showSpinner" : "hideSpinner";
+    var ttfb = this.props.page.metricsArray.find(x => x.name == "TTFB");
+    var perf = this.props.page.metricsArray.find(x => x.name == "Performance");
 
     return (
         <span id={this.props.name} className={colorRunningClass}>
           <span>Today's averages for {this.props.title}: </span>
           <span>Performance: </span>
-          <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{this.props.page.currentAverage.toFixed(2) +" "}</span>
+          <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (perf) ? perf.currentAverage.toFixed(2) + " " : 0 + " "}</span>
           <span>Time To First Byte: </span>
-          <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{this.props.page.currentTTFBAverage.toFixed(2) + " ms "}</span> 
+          <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (ttfb) ? ttfb.currentAverage.toFixed(2) + " " : 0 + " ms "}</span> 
           <span> (This script has run </span>
           <span id={this.props.name + "Runs"} className={"score "+ colorScoreClass}>{this.props.page.noOfRuns}</span> times) 
           <span id={this.props.name + "Running"} className={"running " + displaySpinnerClass}><img src="https://az620379.vo.msecnd.net/images/loading.gif" className="spinner"/></span>  

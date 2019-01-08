@@ -1,6 +1,7 @@
 var LighthouseHelper = require('./LighthouseHelper');
 var Globals = require('./globals'); 
 const lighthouseHelper = new LighthouseHelper();
+const constants = require('./constants');
 
 var Runner = function(){
     return {
@@ -35,11 +36,11 @@ var Runner = function(){
               for(var pageTypeIndex in globals.pageTypes){
                   var currentPage = globals.pageTypes[pageTypeIndex].name;
                   if(globals.pages[currentPage].dayReset == true) {
-                      lighthouseHelper.writeToLogsPerformance('w',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(1),globals.pages[currentPage].currentTTFBAverage.toFixed(),globals.pages[currentPage].noOfRuns);
+                      lighthouseHelper.writeToLogsPerformance('w',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].metrics.get(PerformanceKey).currentAverage.toFixed(1),globals.pages[currentPage].metrics.get(TimeToFirstByteKey).currentAverage.toFixed(),globals.pages[currentPage].noOfRuns);
                       globals.pages[currentPage].dayReset = false;
                   }
                   else {
-                      lighthouseHelper.writeToLogsPerformance('a',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].currentAverage.toFixed(1),globals.pages[currentPage].currentTTFBAverage.toFixed(),globals.pages[currentPage].noOfRuns);
+                      lighthouseHelper.writeToLogsPerformance('a',"/logs/performance_scores_"+ currentPage +".txt",globals.pages[currentPage].metrics.get(PerformanceKey).currentAverage.toFixed(1),globals.pages[currentPage].metrics.get(TimeToFirstByteKey).currentAverage.toFixed(),globals.pages[currentPage].noOfRuns);
                   }
               }
 
