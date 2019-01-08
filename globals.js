@@ -15,12 +15,11 @@ module.exports = class Globals {
             this.pages[pageTypeName].dayReset = false;
             this.pages[pageTypeName].opportunities = new Map();
             this.pages[pageTypeName].opportunitiesArray = [];
+            this.pages[pageTypeName].metrics = new Map();
             this.pages[pageTypeName].metricsArray = [];
             this.pages[pageTypeName].startTime = new Date();
             this.pages[pageTypeName].pageType = pageTypeName;
             this.pages[pageTypeName].url = pageTypeUrl;
-
-            this.pages[pageTypeName].metrics = new Map();
         }
     }
 }

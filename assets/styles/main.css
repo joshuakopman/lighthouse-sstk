@@ -22,9 +22,9 @@ h1{
     font-size: 11px;
 }
 .textScores{
-    text-align: left;
+    text-align: center;
     margin: 0px auto;
-    width: 925px;
+    width: 1250px;
     font-weight: bold;
 }
 .desc{
@@ -105,4 +105,7 @@ h1{
 }
 .bold{
     font-weight: bold;
+}
+.textScores div{
+    margin-bottom:10px;
 }

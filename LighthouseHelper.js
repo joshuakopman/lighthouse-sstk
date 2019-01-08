@@ -72,8 +72,16 @@ var LighthouseHelper = function(){
                           self.setMetricsMap(page,PerformanceKey,results.categories.performance.score * 100);
                         }
 
-                        if(results.audits && results.audits["time-to-first-byte"]){
-                          self.setMetricsMap(page,TimeToFirstByteKey,results.audits["time-to-first-byte"].rawValue);
+                        if(results.audits && results.audits[TimeToFirstByteKey]){
+                          self.setMetricsMap(page,TimeToFirstByteKey,results.audits[TimeToFirstByteKey].rawValue);
+                        }
+
+                        if(results.audits && results.audits[FirstContentfulPaintKey]){
+                          self.setMetricsMap(page,FirstContentfulPaintKey,results.audits[FirstContentfulPaintKey].rawValue);
+                        }
+
+                        if(results.audits && results.audits[InteractiveKey]){
+                          self.setMetricsMap(page,InteractiveKey,results.audits[InteractiveKey].rawValue);
                         }
                         page.metricsArray = [];
                         page.metrics.forEach(function(value, key, map){
@@ -103,10 +111,15 @@ var LighthouseHelper = function(){
                  }, 2000);
             });
         },
-        writeToLogsPerformance:function(flag,filePath,avg,avgTTFB,noOfRuns){
+        writeToLogsPerformance:function(flag,filePath,metrics,noOfRuns){
               var time = new moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
               var stream = fs.createWriteStream(__dirname + filePath, {flags:flag});
-              stream.write("Performance: " + avg + " | TTFB: " + avgTTFB + "ms | "+ time +" | "+noOfRuns+" runs\n");
+              stream.write("Performance: " + 
+                metrics.get(PerformanceKey).currentAverage.toFixed(2) + " | TTFB: " + 
+                metrics.get(TimeToFirstByteKey).currentAverage.toFixed(2) + "ms | Contentful: " +
+                (metrics.get(FirstContentfulPaintKey).currentAverage/1000).toFixed(2) + "s | Interactive: " +
+                (metrics.get(InteractiveKey).currentAverage/1000).toFixed(2) + "s | " +
+                time +" | " + noOfRuns + " runs\n");
               stream.end();
               stream.on('error', function(err) {
                   console.log(err);
