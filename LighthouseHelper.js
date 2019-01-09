@@ -118,7 +118,7 @@ var LighthouseHelper = function(){
                 metrics.get(PerformanceKey).currentAverage.toFixed(2) + " | TTFB: " + 
                 metrics.get(TimeToFirstByteKey).currentAverage.toFixed(2) + "ms | Contentful: " +
                 (metrics.get(FirstContentfulPaintKey).currentAverage/1000).toFixed(2) + "s | Interactive: " +
-                (metrics.get(EstimatedInputLatency).currentAverage/1000).toFixed(2) + "ms | " +
+                (metrics.get(EstimatedInputLatency).currentAverage).toFixed(2) + "ms | " +
                 time +" | " + noOfRuns + " runs\n");
               stream.end();
               stream.on('error', function(err) {

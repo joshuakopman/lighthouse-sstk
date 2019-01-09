@@ -27,7 +27,7 @@ export default class TextScore extends React.Component {
             <span>First Contentful Paint: </span>
             <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (contentful) ? (contentful.currentAverage/1000).toFixed(2) + "s " : 0 + "s "}</span>
             <span>Estimated Input Latency: </span>
-            <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (estimatedinputlatency) ? (estimatedinputlatency.currentAverage/1000).toFixed(2) + "ms " : 0 + "ms "}</span>  
+            <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (estimatedinputlatency) ? (estimatedinputlatency.currentAverage).toFixed(2) + "ms " : 0 + "ms "}</span>  
             <span> (This script has run </span>
             <span id={this.props.name + "Runs"} className={"score "+ colorScoreClass}>{this.props.page.noOfRuns}</span> times) 
             <span id={this.props.name + "Running"} className={"running " + displaySpinnerClass}><img src="https://az620379.vo.msecnd.net/images/loading.gif" className="spinner"/></span>  
