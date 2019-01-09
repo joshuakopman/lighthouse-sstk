@@ -48,7 +48,7 @@ export default class TextScore extends React.Component {
             <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (speedindex) ? (speedindex.currentAverage).toFixed(2) + " " : 0 + " "}</span>  
             <span> (This script has run </span>
             <span id={this.props.name + "Runs"} className={"score "+ this.determineColorClass()}>{this.props.page.noOfRuns}</span> times) 
-            <span id={this.props.name + "Running"} className={"running " + this.determineColorClass()}><img src="https://az620379.vo.msecnd.net/images/loading.gif" className="spinner"/></span>  
+            <span id={this.props.name + "Running"} className={"running " + displaySpinnerClass}><img src="https://az620379.vo.msecnd.net/images/loading.gif" className="spinner"/></span>  
           </div>
         </span>
     );
