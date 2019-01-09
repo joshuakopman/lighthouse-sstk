@@ -83,6 +83,11 @@ var LighthouseHelper = function(){
                         if(results.audits && results.audits[EstimatedInputLatency]){
                           self.setMetricsMap(page,EstimatedInputLatency,results.audits[EstimatedInputLatency].rawValue);
                         }
+
+                        if(results.audits && results.audits[SpeedIndexKey]){
+                          self.setMetricsMap(page,SpeedIndexKey,results.audits[SpeedIndexKey].rawValue);
+                        }
+
                         page.metricsArray = [];
                         page.metrics.forEach(function(value, key, map){
                             item = {};
@@ -119,6 +124,7 @@ var LighthouseHelper = function(){
                 metrics.get(TimeToFirstByteKey).currentAverage.toFixed(2) + "ms | Contentful: " +
                 (metrics.get(FirstContentfulPaintKey).currentAverage/1000).toFixed(2) + "s | Interactive: " +
                 (metrics.get(EstimatedInputLatency).currentAverage).toFixed(2) + "ms | " +
+                (metrics.get(SpeedIndexKey).currentAverage).toFixed(2) + " | " +
                 time +" | " + noOfRuns + " runs\n");
               stream.end();
               stream.on('error', function(err) {

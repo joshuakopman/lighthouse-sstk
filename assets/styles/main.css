@@ -24,7 +24,7 @@ h1{
 .textScores{
     text-align: center;
     margin: 0px auto;
-    width: 1250px;
+    width: 1400px;
     font-weight: bold;
 }
 .desc{
@@ -96,6 +96,12 @@ h1{
 }
 .red{
     color: #f54336;
+}
+.orange{
+    color: orange;
+}
+.green{
+    color: green;
 }
 .showSpinner{
     display: inline;

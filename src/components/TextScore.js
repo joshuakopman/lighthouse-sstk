@@ -6,31 +6,49 @@ export default class TextScore extends React.Component {
   constructor(props) {
     super(props);
   }
+  determineColorClass(val){
+    if(this.props.name == this.props.testRunningID) {
+      return "active";
+    }
 
+    if(val && val.currentAverage) {
+      if(val.currentAverage <= 49){
+        return "red";
+      }else if(val.currentAverage >= 50 && val.currentAverage <= 89){
+        return "orange";
+      }else{
+        return "green";
+      }
+    }
+
+    return "red";
+  }
   render() {
     var colorRunningClass = (this.props.name == this.props.testRunningID) ? "active" : "inactive";
-    var colorScoreClass = (this.props.name == this.props.testRunningID) ? "active" : "red";
     var displaySpinnerClass = (this.props.name == this.props.testRunningID) ? "showSpinner" : "hideSpinner";
     var ttfb = this.props.page.metricsArray.find(x => x.name == "time-to-first-byte");
     var perf = this.props.page.metricsArray.find(x => x.name == "performance");
     var contentful = this.props.page.metricsArray.find(x => x.name == "first-contentful-paint");
     var estimatedinputlatency = this.props.page.metricsArray.find(x => x.name == "estimated-input-latency");
+    var speedindex = this.props.page.metricsArray.find(x => x.name == "speed-index");
 
     return (
         <span id={this.props.name} className={colorRunningClass}>
           <span>Today's averages for {this.props.title}: </span>
           <div>
             <span>Performance: </span>
-            <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (perf) ? perf.currentAverage.toFixed(2) + " " : 0 + " "}</span>
+            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass(perf)}>{ (perf) ? perf.currentAverage.toFixed(2) + " " : 0 + " "}</span>
             <span>Time To First Byte: </span>
-            <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (ttfb) ? ttfb.currentAverage.toFixed(2) + "ms " : 0 + "ms "}</span> 
+            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (ttfb) ? ttfb.currentAverage.toFixed(2) + "ms " : 0 + "ms "}</span> 
             <span>First Contentful Paint: </span>
-            <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (contentful) ? (contentful.currentAverage/1000).toFixed(2) + "s " : 0 + "s "}</span>
+            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (contentful) ? (contentful.currentAverage/1000).toFixed(2) + "s " : 0 + "s "}</span>
             <span>Estimated Input Latency: </span>
-            <span id={this.props.name + "Score"} className={"score " + colorScoreClass}>{ (estimatedinputlatency) ? (estimatedinputlatency.currentAverage).toFixed(2) + "ms " : 0 + "ms "}</span>  
+            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (estimatedinputlatency) ? (estimatedinputlatency.currentAverage).toFixed(2) + "ms " : 0 + "ms "}</span>  
+            <span>Speed Index: </span>
+            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (speedindex) ? (speedindex.currentAverage).toFixed(2) + " " : 0 + " "}</span>  
             <span> (This script has run </span>
-            <span id={this.props.name + "Runs"} className={"score "+ colorScoreClass}>{this.props.page.noOfRuns}</span> times) 
-            <span id={this.props.name + "Running"} className={"running " + displaySpinnerClass}><img src="https://az620379.vo.msecnd.net/images/loading.gif" className="spinner"/></span>  
+            <span id={this.props.name + "Runs"} className={"score "+ this.determineColorClass()}>{this.props.page.noOfRuns}</span> times) 
+            <span id={this.props.name + "Running"} className={"running " + this.determineColorClass()}><img src="https://az620379.vo.msecnd.net/images/loading.gif" className="spinner"/></span>  
           </div>
         </span>
     );
