@@ -80,8 +80,8 @@ var LighthouseHelper = function(){
                           self.setMetricsMap(page,FirstContentfulPaintKey,results.audits[FirstContentfulPaintKey].rawValue);
                         }
 
-                        if(results.audits && results.audits[InteractiveKey]){
-                          self.setMetricsMap(page,InteractiveKey,results.audits[InteractiveKey].rawValue);
+                        if(results.audits && results.audits[EstimatedInputLatency]){
+                          self.setMetricsMap(page,EstimatedInputLatency,results.audits[EstimatedInputLatency].rawValue);
                         }
                         page.metricsArray = [];
                         page.metrics.forEach(function(value, key, map){
@@ -118,7 +118,7 @@ var LighthouseHelper = function(){
                 metrics.get(PerformanceKey).currentAverage.toFixed(2) + " | TTFB: " + 
                 metrics.get(TimeToFirstByteKey).currentAverage.toFixed(2) + "ms | Contentful: " +
                 (metrics.get(FirstContentfulPaintKey).currentAverage/1000).toFixed(2) + "s | Interactive: " +
-                (metrics.get(InteractiveKey).currentAverage/1000).toFixed(2) + "s | " +
+                (metrics.get(EstimatedInputLatency).currentAverage/1000).toFixed(2) + "ms | " +
                 time +" | " + noOfRuns + " runs\n");
               stream.end();
               stream.on('error', function(err) {
