@@ -72,16 +72,16 @@ var LighthouseHelper = function(){
                           self.setMetricsMap(page,PerformanceKey,results.categories.performance.score * 100);
                         }
 
-                        if(results.audits && results.audits[TimeToFirstByteKey]){
-                          self.setMetricsMap(page,TimeToFirstByteKey,results.audits[TimeToFirstByteKey].rawValue);
+                        if(results.audits && results.audits[FirstCPUIdleKey]){
+                          self.setMetricsMap(page,FirstCPUIdleKey,results.audits[FirstCPUIdleKey].rawValue);
                         }
 
                         if(results.audits && results.audits[FirstContentfulPaintKey]){
                           self.setMetricsMap(page,FirstContentfulPaintKey,results.audits[FirstContentfulPaintKey].rawValue);
                         }
 
-                        if(results.audits && results.audits[EstimatedInputLatency]){
-                          self.setMetricsMap(page,EstimatedInputLatency,results.audits[EstimatedInputLatency].rawValue);
+                        if(results.audits && results.audits[InteractiveKey]){
+                          self.setMetricsMap(page,InteractiveKey,results.audits[InteractiveKey].rawValue);
                         }
 
                         if(results.audits && results.audits[SpeedIndexKey]){
@@ -120,10 +120,10 @@ var LighthouseHelper = function(){
               var time = new moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
               var stream = fs.createWriteStream(__dirname + filePath, {flags:flag});
               stream.write("Performance: " + 
-                metrics.get(PerformanceKey).currentAverage.toFixed(2) + " | TTFB: " + 
-                metrics.get(TimeToFirstByteKey).currentAverage.toFixed(2) + "ms | Contentful: " +
+                metrics.get(PerformanceKey).currentAverage.toFixed(2) + " | CPU: " + 
+                metrics.get(FirstCPUIdleKey).currentAverage.toFixed(2) + "ms | Contentful: " +
                 (metrics.get(FirstContentfulPaintKey).currentAverage/1000).toFixed(2) + "s | Interactive: " +
-                (metrics.get(EstimatedInputLatency).currentAverage).toFixed(2) + "ms | " +
+                (metrics.get(InteractiveKey).currentAverage).toFixed(2) + "ms | Speed Index: " +
                 (metrics.get(SpeedIndexKey).currentAverage).toFixed(2) + " | " +
                 time +" | " + noOfRuns + " runs\n");
               stream.end();

@@ -26,10 +26,10 @@ export default class TextScore extends React.Component {
   render() {
     var colorRunningClass = (this.props.name == this.props.testRunningID) ? "active" : "inactive";
     var displaySpinnerClass = (this.props.name == this.props.testRunningID) ? "showSpinner" : "hideSpinner";
-    var ttfb = this.props.page.metricsArray.find(x => x.name == "time-to-first-byte");
+    var firstcpuidle = this.props.page.metricsArray.find(x => x.name == "first-cpu-idle");
     var perf = this.props.page.metricsArray.find(x => x.name == "performance");
     var contentful = this.props.page.metricsArray.find(x => x.name == "first-contentful-paint");
-    var estimatedinputlatency = this.props.page.metricsArray.find(x => x.name == "estimated-input-latency");
+    var interactive = this.props.page.metricsArray.find(x => x.name == "interactive");
     var speedindex = this.props.page.metricsArray.find(x => x.name == "speed-index");
 
     return (
@@ -38,12 +38,12 @@ export default class TextScore extends React.Component {
           <div>
             <span>Performance: </span>
             <span id={this.props.name + "Score"} className={"score " + this.determineColorClass(perf)}>{ (perf) ? perf.currentAverage.toFixed(2) + " " : 0 + " "}</span>
-            <span>Time To First Byte: </span>
-            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (ttfb) ? ttfb.currentAverage.toFixed(2) + "ms " : 0 + "ms "}</span> 
+            <span>First CPU Idle: </span>
+            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (firstcpuidle) ? firstcpuidle.currentAverage.toFixed(2) + "ms " : 0 + "ms "}</span> 
             <span>First Contentful Paint: </span>
             <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (contentful) ? (contentful.currentAverage/1000).toFixed(2) + "s " : 0 + "s "}</span>
-            <span>Estimated Input Latency: </span>
-            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (estimatedinputlatency) ? (estimatedinputlatency.currentAverage).toFixed(2) + "ms " : 0 + "ms "}</span>  
+            <span>Interactive: </span>
+            <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (interactive) ? (interactive.currentAverage).toFixed(2) + "ms " : 0 + "ms "}</span>  
             <span>Speed Index: </span>
             <span id={this.props.name + "Score"} className={"score " + this.determineColorClass()}>{ (speedindex) ? (speedindex.currentAverage).toFixed(2) + " " : 0 + " "}</span>  
             <span> (This script has run </span>
