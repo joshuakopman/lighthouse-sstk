@@ -65,7 +65,7 @@ var LighthouseHelper = function(){
         },
         runLighthouseReport:function(page,callback){
             var self = this;
-            new lighthouseLauncher().launchChromeAndRunLighthouse(page.url, {chromeFlags: ['--headless']}).then(results => {
+            new lighthouseLauncher().launchChromeAndRunLighthouse(page.url, {chromeFlags: ['--headless'], extraHeaders: {"x-sstk-app": "lighthouse-recorder"}}).then(results => {
                 setTimeout(() => {
                      if (results) {
                         if(results.categories && results.categories.performance.score){
