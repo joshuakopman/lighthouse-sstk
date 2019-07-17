@@ -63,9 +63,9 @@ var LighthouseHelper = function(){
 
           page.metrics.set(key,currentMetric);
         },
-        runLighthouseReport:function(page,callback){
+        runLighthouseReport: async function(page){
             var self = this;
-            new lighthouseLauncher().launchChromeAndRunLighthouse(page.url, {chromeFlags: ['--headless'], extraHeaders: {"x-sstk-app": "lighthouse-recorder"}}).then(results => {
+            await new lighthouseLauncher().launchChromeAndRunLighthouse(page.url, {chromeFlags: ['--headless'], extraHeaders: {"x-sstk-app": "lighthouse-recorder"}}).then(results => {
                 setTimeout(() => {
                      if (results) {
                         if(results.categories && results.categories.performance.score){
@@ -107,10 +107,6 @@ var LighthouseHelper = function(){
                             page.startTime = new Date();
                             page.dayReset = true;
                         }
-                    }
-
-                    if(callback){
-                      callback();
                     }
 
                  }, 2000);
