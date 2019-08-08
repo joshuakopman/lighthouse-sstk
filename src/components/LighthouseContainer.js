@@ -46,7 +46,7 @@ export default class LighthouseContainer extends React.Component {
               <h1>Lighthouse</h1>
               <img src="https://developers.google.com/web/progressive-web-apps/images/pwa-lighthouse.png" height="75px"/>
           </div>
-          <div className="desc">An app to run a Lighthouse audit every five minutes and aggregate the results.</div>
+          <div className="desc">An app to run a Lighthouse audit continually and aggregate the results.</div>
           <div id="textScoresContainer" className="textScores">
             {this.pageTypes.map((pageType) => {
               if(pages[pageType.name]) {
