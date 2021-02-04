@@ -72,20 +72,20 @@ var LighthouseHelper = function(){
                           self.setMetricsMap(page,PerformanceKey,results.categories.performance.score * 100);
                         }
 
-                        if(results.audits && results.audits[FirstCPUIdleKey]){
-                          self.setMetricsMap(page,FirstCPUIdleKey,results.audits[FirstCPUIdleKey].rawValue);
+                        if(results.audits && results.audits[SpeedIndexKey]){
+                          self.setMetricsMap(page,SpeedIndexKey,results.audits[SpeedIndexKey].numericValue);
                         }
 
                         if(results.audits && results.audits[FirstContentfulPaintKey]){
-                          self.setMetricsMap(page,FirstContentfulPaintKey,results.audits[FirstContentfulPaintKey].rawValue);
+                          self.setMetricsMap(page,FirstContentfulPaintKey,results.audits[FirstContentfulPaintKey].numericValue);
                         }
 
                         if(results.audits && results.audits[InteractiveKey]){
-                          self.setMetricsMap(page,InteractiveKey,results.audits[InteractiveKey].rawValue);
+                          self.setMetricsMap(page,InteractiveKey,results.audits[InteractiveKey].numericValue);
                         }
 
-                        if(results.audits && results.audits[SpeedIndexKey]){
-                          self.setMetricsMap(page,SpeedIndexKey,results.audits[SpeedIndexKey].rawValue);
+                        if(results.audits && results.audits[CumulativeLayoutShiftKey]){
+                          self.setMetricsMap(page,CumulativeLayoutShiftKey,results.audits[CumulativeLayoutShiftKey].numericValue);
                         }
 
                         page.metricsArray = [];
@@ -116,11 +116,11 @@ var LighthouseHelper = function(){
               var time = new moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:ss");
               var stream = fs.createWriteStream(__dirname + filePath, {flags:flag});
               stream.write("Performance: " + 
-                metrics.get(PerformanceKey).currentAverage.toFixed(2) + " | CPU: " + 
-                metrics.get(FirstCPUIdleKey).currentAverage.toFixed(2) + "ms | Contentful: " +
+                metrics.get(PerformanceKey).currentAverage.toFixed(2) + " | Speed Index: " + 
+                metrics.get(SpeedIndexKey).currentAverage.toFixed(2) + "ms | Contentful: " +
                 (metrics.get(FirstContentfulPaintKey).currentAverage/1000).toFixed(2) + "s | Interactive: " +
-                (metrics.get(InteractiveKey).currentAverage).toFixed(2) + "ms | Speed Index: " +
-                (metrics.get(SpeedIndexKey).currentAverage).toFixed(2) + " | " +
+                (metrics.get(InteractiveKey).currentAverage).toFixed(2) + "ms | CLS: " +
+                (metrics.get(CumulativeLayoutShiftKey).currentAverage).toFixed(2) + " | " +
                 time +" | " + noOfRuns + " runs\n");
               stream.end();
               stream.on('error', function(err) {

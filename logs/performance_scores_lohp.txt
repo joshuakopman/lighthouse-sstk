@@ -1,0 +1,12 @@
+Performance: 10.62 | CPU: 8439.64ms | Contentful: 7.53s | Interactive: 19304.30ms | Speed Index: 10153.47 | 2021-02-03 14:56:45 | 60 runs
+Performance: 9.90 | CPU: 9524.53ms | Contentful: 7.59s | Interactive: 19966.10ms | Speed Index: 10342.00 | 2021-02-03 15:56:45 | 115 runs
+Performance: 10.59 | CPU: 8975.40ms | Contentful: 7.46s | Interactive: 19693.67ms | Speed Index: 10181.20 | 2021-02-03 16:56:45 | 173 runs
+Performance: 11.03 | CPU: 8566.98ms | Contentful: 7.38s | Interactive: 19543.14ms | Speed Index: 10118.14 | 2021-02-03 17:56:45 | 234 runs
+Performance: 11.39 | CPU: 8391.02ms | Contentful: 7.32s | Interactive: 19292.46ms | Speed Index: 9987.33 | 2021-02-03 18:56:46 | 296 runs
+Performance: 11.43 | CPU: 8310.66ms | Contentful: 7.31s | Interactive: 19291.03ms | Speed Index: 9997.24 | 2021-02-03 19:56:46 | 355 runs
+Performance: 44.80 | CPU: 8357.35ms | Contentful: 2.14s | Interactive: 24057.52ms | Speed Index: 0.00 | 2021-02-03 23:12:41 | 30 runs
+Performance: 45.56 | CPU: 7626.96ms | Contentful: 2.04s | Interactive: 24143.86ms | Speed Index: 0.00 | 2021-02-04 01:47:55 | 43 runs
+Performance: 45.56 | CPU: 7626.96ms | Contentful: 2.04s | Interactive: 24143.86ms | Speed Index: 0.00 | 2021-02-04 04:27:58 | 43 runs
+Performance: 45.48 | CPU: 8156.12ms | Contentful: 2.03s | Interactive: 24336.66ms | Speed Index: 0.00 | 2021-02-04 06:32:59 | 44 runs
+Performance: 45.40 | CPU: 8130.66ms | Contentful: 2.02s | Interactive: 24369.21ms | Speed Index: 0.00 | 2021-02-04 07:40:10 | 45 runs
+Performance: 45.63 | CPU: 7990.61ms | Contentful: 2.01s | Interactive: 24377.49ms | Speed Index: 0.00 | 2021-02-04 09:23:30 | 46 runs
