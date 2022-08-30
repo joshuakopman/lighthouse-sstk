@@ -15,7 +15,7 @@
     "chrome-launcher": "0.10.5",
     "express": "*",
     "lighthouse": "6.0.0",
-    "moment-timezone": "^0.5.21",
+    "moment-timezone": "^0.5.35",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "ws": "*"
